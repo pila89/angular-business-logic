@@ -1,10 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { Error404Component } from './pages/error404/error404.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
+  {
+    path: 'auth',
+    loadChildren: () =>
+      import('./common/common.module').then((m) => m.AuthModule),
+  },
+  { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule) },
+  { path: '**', component: Error404Component },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
