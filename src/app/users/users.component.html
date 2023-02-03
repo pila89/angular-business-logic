@@ -1,1 +1,27 @@
-<p>users works!</p>
+<div class="row">
+  <div class="my-5 offset-md-2 col-md-8">
+    <button class="btn btn-success" routerLink="/users/create"> Add</button>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Index</th>
+          <th scope="col">Fullname</th>
+          <th scope="col">Email</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of usersData ; let i =index">
+          <th scope="row">{{i}}</th>
+          <td>{{user.fullName}}</td>
+          <td>{{user.email}}</td>
+          <td>
+            <button class="btn btn-primary me-1" [routerLink]="['/users/update',i]"> update</button>
+            <button (click)="deleteUser(i)" class="btn btn-danger"> delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- "/users/update/{{i}}" -->

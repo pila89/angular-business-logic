@@ -1,1 +1,69 @@
-<p>register works!</p>
+<div class="row my-5">
+    <div class="offset-md-3 col-md-6 my-5">
+        <form class="my-0" (ngSubmit)="onRegister()" *ngIf="registerForm" [formGroup]="registerForm">
+            <h1 class="text-primary text-center my-3"> register</h1>
+            <div class="mb-3">
+                <label for="fullname" class="form-label">Full name:</label>
+                <input type="text" class="form-control" id="fullname" name="fullName" autocomplete="username"
+                    placeholder="Type your full name here" formControlName="fullName"
+                    [ngClass]="{ 'is-invalid': isSubmitted && registerForm.get('fullName')?.invalid  , 'is-valid': isSubmitted && registerForm.get('fullName')?.valid}">
+                <div class="d-block invalid-feedback"
+                    *ngIf="isSubmitted && registerForm?.get('fullName')?.hasError('required')">
+                    fullName is required
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">E-mail address</label>
+                <input type="email" class="form-control" id="email" name="email" autocomplete="email"
+                    placeholder="Type your e-mail address here" formControlName="email"
+                    [ngClass]="{ 'is-invalid': isSubmitted && registerForm.get('email')?.invalid , 'is-valid': isSubmitted && registerForm.get('email')?.valid}">
+                <div class="d-block invalid-feedback"
+                    *ngIf="isSubmitted && registerForm?.get('email')?.hasError('required')">
+                    email is required
+                </div>
+                <div class="d-block invalid-feedback"
+                    *ngIf="isSubmitted && registerForm?.get('email')?.hasError('email')">
+                    email must be a valid email adresse
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" autocomplete="new-password"
+                    placeholder="Type your password here" formControlName="password"
+                    [ngClass]="{ 'is-invalid': isSubmitted && registerForm.get('password')?.invalid , 'is-valid': isSubmitted && registerForm.get('password')?.valid}">
+                <div class="d-block invalid-feedback"
+                    *ngIf="isSubmitted && registerForm?.get('password')?.hasError('required')">
+                    password is required
+                </div>
+                <div class="d-block invalid-feedback"
+                    *ngIf="isSubmitted && registerForm?.get('password')?.hasError('minlength')">
+                    password must be longer than 8 characters
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="passwordConfirmation" class="form-label">Confirm password</label>
+                <input type="password" class="form-control" id="passwordConfirmation" name="confirmPassword"
+                    autocomplete="new-password" placeholder="Confirm your password here"
+                    formControlName="confirmPassword"
+                    [ngClass]="{ 'is-invalid': isSubmitted && registerForm.get('confirmPassword')?.invalid , 'is-valid': isSubmitted && registerForm.get('confirmPassword')?.valid}">
+                <div class="d-block invalid-feedback"
+                    *ngIf="isSubmitted && registerForm?.get('confirmPassword')?.hasError('required')">
+                    confirm password is required
+                </div>
+                <div class="d-block invalid-feedback"
+                    *ngIf="isSubmitted && registerForm?.get('confirmPassword')?.hasError('minlength')">
+                    confirm password must be longer than 8 characters
+                </div>
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="check">
+                <label class="form-check-label" for="check">
+                    Accept <a routerLink="/term-and-condition">term and conditions</a>.
+                </label>
+            </div>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Sign up</button>
+            </div>
+        </form>
+    </div>
+</div>
