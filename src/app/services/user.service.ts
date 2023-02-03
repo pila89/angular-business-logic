@@ -13,14 +13,11 @@ export class UserService {
   constructor() {}
 
   getAllUsers() {
-    if (localStorage.getItem('salim') === null) {
-      return this.users;
-    } else {
-      const xxx: any = localStorage.getItem('salim');
-      console.log(JSON.parse(xxx));
-      this.users = JSON.parse(xxx);
-      return this.users;
+    const data: any = localStorage.getItem('users');
+    if (data !== null) {
+      this.users = JSON.parse(data);
     }
+    return this.users;
   }
 
   getUserByIndex(index: number) {
@@ -29,20 +26,16 @@ export class UserService {
 
   updateUserByIndex(index: number, userUpdatet: any) {
     this.users.splice(index, 1, userUpdatet);
+    localStorage.setItem('users', JSON.stringify(this.users));
   }
 
   deleteUserByIndex(index: number) {
     this.users.splice(index, 1);
+    localStorage.setItem('users', JSON.stringify(this.users));
   }
 
   addUser(userData: any) {
-    if (localStorage.getItem('salim') === null) {
-      this.users.push(userData);
-      console.log(this.users);
-      localStorage.setItem('salim', JSON.stringify(this.users));
-    } else {
-      this.users.push(userData);
-      localStorage.setItem('salim', JSON.stringify(this.users));
-    }
+    this.users.push(userData);
+    localStorage.setItem('users', JSON.stringify(this.users));
   }
 }
