@@ -4,20 +4,20 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th scope="col">Index</th>
+          <th scope="col">Id</th>
           <th scope="col">Fullname</th>
           <th scope="col">Email</th>
           <th scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of usersData ; let i =index">
-          <th scope="row">{{i}}</th>
+        <tr *ngFor="let user of usersData">
+          <th scope="row">{{user.id}}</th>
           <td>{{user.fullName}}</td>
           <td>{{user.email}}</td>
           <td>
-            <button class="btn btn-primary me-1" [routerLink]="['/users/update',i]"> update</button>
-            <button (click)="deleteUser(i)" class="btn btn-danger"> delete</button>
+            <button class="btn btn-primary me-1" [routerLink]="['/users/update',user.id]"> update</button>
+            <button (click)="deleteUser(user.id)" class="btn btn-danger"> delete</button>
           </td>
         </tr>
       </tbody>

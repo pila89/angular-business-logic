@@ -1,4 +1,11 @@
 {
-  "users": [],
-  "products":[]
+  "users": [
+    {
+      "fullName": "Willow Guzman",
+      "email": "kuwuwimave@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "id": 2
+    }
+  ],
+  "products": []
 }

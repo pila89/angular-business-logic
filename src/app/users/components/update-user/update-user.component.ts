@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 export class UpdateUserComponent implements OnInit {
   public isSubmitted = false;
   public userForm?: FormGroup;
-  private index: any;
+  private id: any;
   constructor(
     private userService: UserService,
     private router: Router,
@@ -25,19 +25,25 @@ export class UpdateUserComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe((paramMap) => {
       // console.log(paramMap);
       // console.log(paramMap.get('index'));
-      this.index = paramMap.get('index');
+      this.id = paramMap.get('id');
     });
     //second way : using procedural programming => imperatif programming
     // console.log(this.activatedRoute.snapshot.params);
-    this.index = this.activatedRoute.snapshot.params['index'];
+    this.id = this.activatedRoute.snapshot.params['id'];
 
     //2.creation d´un formulaire
     this.createUserForm();
     //3.Recuperation des donnes de user ayant l´id en question
-    const data = this.userService.getUserByIndex(this.index);
-    //4.Afficher les donnees dans le formulaire
-    this.userForm?.get('confirmPassword')?.setValue(data.password);
-    this.userForm?.patchValue(data);
+    this.userService.getUserById(this.id).subscribe(
+      (data: any) => {
+        //4.Afficher les donnees dans le formulaire
+        this.userForm?.get('confirmPassword')?.setValue(data.password);
+        this.userForm?.patchValue(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
   createUserForm() {
     this.userForm = new FormGroup({
@@ -61,11 +67,16 @@ export class UpdateUserComponent implements OnInit {
     const data = this.userForm?.value;
     delete data.confirmPassword;
     //  console.log(data);
-    this.userService.updateUserByIndex(this.index, data);
-
-    // // reset form
-    this.userForm?.reset();
-    this.isSubmitted = false;
-    this.router.navigateByUrl('/users'); // redirection without parameters
+    this.userService.updateUserById(this.id, data).subscribe(
+      (data) => {
+        // // reset form
+        this.userForm?.reset();
+        this.isSubmitted = false;
+        this.router.navigateByUrl('/users'); // redirection without parameters
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

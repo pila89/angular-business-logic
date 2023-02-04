@@ -11,9 +11,23 @@ export class UsersComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.usersData = this.userService.getAllUsers();
+    this.userService.getAllUsers().subscribe(
+      (data) => {
+        this.usersData = data;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
   deleteUser(index: any) {
-    this.userService.deleteUserByIndex(index);
+    this.userService.deleteUserById(index).subscribe(
+      (data) => {
+        this.ngOnInit();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

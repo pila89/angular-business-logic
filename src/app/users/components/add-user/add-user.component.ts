@@ -38,10 +38,16 @@ export class AddUserComponent implements OnInit {
     const data = this.userForm?.value;
     delete data.confirmPassword;
     // console.log(data);
-    this.userService.addUser(data);
-    // // reset form
-    this.userForm?.reset();
-    this.isSubmitted = false;
-    this.router.navigateByUrl('/users'); // redirection without parameters
+    this.userService.addUser(data).subscribe(
+      (data) => {
+        // // reset form
+        this.userForm?.reset();
+        this.isSubmitted = false;
+        this.router.navigateByUrl('/users'); // redirection without parameters()
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }
