@@ -12,12 +12,12 @@
       </thead>
       <tbody>
         <tr *ngFor="let user of usersData">
-          <th scope="row">{{user.id}}</th>
+          <th scope="row">{{user._id}}</th>
           <td>{{user.fullName}}</td>
           <td>{{user.email}}</td>
           <td>
-            <button class="btn btn-primary me-1" [routerLink]="['/users/update',user.id]"> update</button>
-            <button (click)="deleteUser(user.id)" class="btn btn-danger"> delete</button>
+            <button class="btn btn-primary me-1" [routerLink]="['/users/update',user._id]"> update</button>
+            <button (click)="deleteUser(user._id)" class="btn btn-danger"> delete</button>
           </td>
         </tr>
       </tbody>

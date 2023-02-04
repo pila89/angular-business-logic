@@ -1,15 +1,15 @@
-deleteUser(index: any) {
-  this.userService.deleteUserById(index).subscribe(
-    (data) => {
-      // this.loadUsers();.pu
-      console.log(this.usersData);
-      const filtredData = this.usersData.filter(
-        (users) => users.id !== index
-      );
-      this.usersData = filtredData;
-    },
-    (error) => {
-      console.log(error);
-    }
-  );
-}
+// deleteUser(index: any) {
+//   this.userService.deleteUserById(index).subscribe(
+//     (data) => {
+//       // this.loadUsers();.pu
+//       console.log(this.usersData);
+//       const filtredData = this.usersData.filter(
+//         (users) => users.id !== index
+//       );
+//       this.usersData = filtredData;
+//     },
+//     (error) => {
+//       console.log(error);
+//     }
+//   );
+// }

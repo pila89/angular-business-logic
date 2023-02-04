@@ -30,7 +30,8 @@ export class LoginComponent implements OnInit {
     }
     // call to rest API (using service)
     this.authService.login(this.loginForm?.value).subscribe(
-      (data) => {
+      (data:any) => {
+        localStorage.setItem("token",data.token)
         this.router.navigateByUrl('/users');
       },
       (error) => {
