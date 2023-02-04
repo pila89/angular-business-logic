@@ -29,18 +29,14 @@ export class LoginComponent implements OnInit {
       return;
     }
     // call to rest API (using service)
-    console.log(this.loginForm?.value);
-    const result = this.authService.login(
-      this.loginForm?.value.email,
-      this.loginForm?.value.password
+    this.authService.login(this.loginForm?.value).subscribe(
+      (data) => {
+        this.router.navigateByUrl('/users');
+      },
+      (error) => {
+        console.log(error);
+        alert("Verifiez vos coordonnes d'acces!");
+      }
     );
-    if (result) {
-      // this.router.navigate(["/users",id]); using if you have a redirection with params
-      this.router.navigateByUrl('/users');
-    } else {
-      alert("Verifiez vos coordonnes d'acces!");
-    }
-    // reset form
-    //this.loginForm?.reset();
   }
 }

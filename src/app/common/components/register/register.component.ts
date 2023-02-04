@@ -35,13 +35,17 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm?.invalid) {
       return;
     }
-    const data = this.registerForm?.value;
-    delete data.confirmPassword;
-    console.log(data);
-    this.authService.register(data);
-    // reset form
-    this.registerForm?.reset();
-    this.isSubmitted = false;
-    this.router.navigateByUrl('/auth/login'); // redirection without parameters
+
+    this.authService.register(this.registerForm?.value).subscribe(
+      (data) => {
+        // reset form
+        this.registerForm?.reset();
+        this.isSubmitted = false;
+        this.router.navigateByUrl('/auth/login'); // redirection without parameters
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

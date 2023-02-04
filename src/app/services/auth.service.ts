@@ -1,29 +1,18 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private users = [
-    { fullName: 'salim', email: 'salim@gmail.com', password: '12345678' },
-    { fullName: 'houssem', email: 'houssem@gmail.com', password: '12345678' },
-    { fullName: 'hatem', email: 'houssem@gmail.com', password: '12345678' },
-  ];
-  constructor() {}
 
-  login(email: string, password: string): boolean {
-    const found = this.users.find(
-      (user) => user.email == email && user.password == password
-    );
-    return found !== undefined;
-    // if (found === undefined) {
-    //   return false;
-    // } else {
-    //   return true;
-    // }
+  constructor(private httpClient:HttpClient) {}
+
+  login(data :any) {
+    return this.httpClient.post(`${environment.baseUrl}/auth/login`, data);
   }
   register(data: any) {
-    this.users.push(data);
-    console.log(this.users);
+    return this.httpClient.post(`${environment.baseUrl}/auth/register`, data);
   }
 }
